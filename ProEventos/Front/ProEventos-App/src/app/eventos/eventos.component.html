@@ -10,12 +10,12 @@
 <table class="table table-striped">
 <thead class="thead-dark">
     <tr *ngIf="eventos && eventos.length">
-        <th>#</th>
         <th>
-            <button type="button" class="btn btn-outline-light" (click)="isCollapsed = !isCollapsed"
-            [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">Esconder imagens
+            <button type="button" class="btn btn-outline-light" (click)="alterarImg()">
+                {{!exibirImg ? 'exibir' : 'ocultar'}}
             </button>
         </th>
+        <th>#</th>
         <th>Tema</th>
         <th>Local</th>
         <th>Data</th>
@@ -25,12 +25,12 @@
 </thead>
 <tbody *ngIf="eventos && eventos.length">
         <tr *ngFor="let evento of eventos">  
+            <td>
+                <img [collapse]="!exibirImg" [isAnimated]="true" src="/assets/{{evento.imagemURL}}"
+                [style.width.px]="widthImg"
+                [style.margin.px]="marginImg">
+            </td>
             <td>{{evento.eventoId}}</td>
-                <td id="collapseBasic" [collapse]="isCollapsed" [isAnimated]="true">
-                    <img src="/assets/{{evento.imagemURL}}"
-                    [style.width.px]="widthImg"
-                    [style.margin.px]="marginImg">
-                </td>
             <td>{{evento.tema}}</td>
             <td>{{evento.local}}</td>
             <td>{{evento.dataEvento}}</td>
