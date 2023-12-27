@@ -1,5 +1,6 @@
 using System.Reflection.Metadata;
 using System;
+using System.Collections.Generic;
 
 namespace ProEventos.Domain
 {
@@ -19,8 +20,9 @@ namespace ProEventos.Domain
         public string ImagemURL { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-        public IEnumerable<Lote>Lote { get; set; }
+        public IEnumerable<Lote>Lotes { get; set; }
         public IEnumerable<RedeSocial>RedesSociais { get; set; }
-        public IEnumerable<Palestrante>Palestrante { get; set; }
+        public IEnumerable<Palestrante>Palestrantes { get; set; }
+        public IEnumerable<PalestranteEvento>PalestrantesEventos { get; set; }
     }
 }

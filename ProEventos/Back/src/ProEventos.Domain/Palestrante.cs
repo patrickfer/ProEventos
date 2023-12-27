@@ -13,6 +13,7 @@ namespace ProEventos.Domain
         public string MiniCurriculo { get; set; }
         public string Telefone { get; set; }
         public string Email { get; set; }
-        public IEnumerable<RedeSocial> RedeSociais { get; set; }
+        public IEnumerable<RedeSocial> RedesSociais { get; set; }
+        public IEnumerable<PalestranteEvento> PalestrantesEventos { get; set; }
     }
 }

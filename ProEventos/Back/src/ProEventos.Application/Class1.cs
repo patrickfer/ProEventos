@@ -1,5 +1,8 @@
-﻿namespace ProEventos.Application;
-public class Class1
+﻿
+namespace ProEventos.Application
 {
+    public class Class1
+    {
 
+    }
 }
