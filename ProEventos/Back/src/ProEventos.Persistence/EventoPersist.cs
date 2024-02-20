@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using ProEventos.Domain;
 using ProEventos.Persistence.Contratos;
 
 namespace ProEventos.Persistence
@@ -13,7 +15,7 @@ namespace ProEventos.Persistence
         public EventoPersist(ProEventosContext context)
         {
             _context = context;
-            
+          // _context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;    
         }
          public async Task<Evento[]> GetAllEventosAsync(bool includePalestrantes = false)
         {
@@ -27,7 +29,7 @@ namespace ProEventos.Persistence
                 .ThenInclude(pe => pe.Palestrante);
            }
 
-           query = query.OrderBy(e => e.Id);
+           query = query.AsNoTracking().OrderBy(e => e.Id);
 
            return await query.ToArrayAsync();
         }
@@ -44,13 +46,13 @@ namespace ProEventos.Persistence
                 .ThenInclude(pe => pe.Palestrante);
            }
 
-           query = query.OrderBy(e => e.Id).Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
+           query = query.AsNoTracking().OrderBy(e => e.Id).Where(e => e.Tema.ToLower().Contains(tema.ToLower()));
 
            return await query.ToArrayAsync();
 
         }
 
-         public async Task<Evento> GetEventosByIdAsync(int EventoId, bool includePalestrantes = false)
+         public async Task<Evento> GetEventoByIdAsync(int EventoId, bool includePalestrantes = false)
         {
              IQueryable<Evento> query = _context.Eventos
            .Include(e => e.Lotes)
@@ -62,7 +64,7 @@ namespace ProEventos.Persistence
                 .ThenInclude(pe => pe.Palestrante);
            }
 
-           query = query.OrderBy(e => e.Id).Where(e => e.Id == EventoId);
+           query = query.AsNoTracking().OrderBy(e => e.Id).Where(e => e.Id == EventoId);
 
            return await query.FirstOrDefaultAsync();
         }

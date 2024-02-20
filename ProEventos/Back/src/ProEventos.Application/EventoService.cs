@@ -49,8 +49,13 @@ namespace ProEventos.Application
                 {
                     return await _eventoPersist.GetEventoByIdAsync(model.Id, false);
                 }
+                
                 return null;
-            } 
+            }
+
+            
+            
+
             catch (Exception ex)
             {
                 
@@ -107,7 +112,7 @@ namespace ProEventos.Application
             }
         }
 
-        public async Task<Evento> GetEventosByIdAsync(int eventoId, bool includePalestrantes = false)
+        public async Task<Evento> GetEventoByIdAsync(int eventoId, bool includePalestrantes = false)
         {
              try
             {
