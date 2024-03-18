@@ -4,9 +4,9 @@
 <div class="form-inline">
     <div class="form-group mb-2">
         <label class="mr-2">Filtro: </label>
-        <input 
-        type="text" 
-        class="form-control mr-2" 
+        <input
+        type="text"
+        class="form-control mr-2"
         paceholder="buscar"
         [(ngModel)]="filtroLista"
         >
@@ -34,7 +34,7 @@
     </tr>
 </thead>
 <tbody *ngIf="eventos && eventos.length">
-        <tr *ngFor="let evento of eventosFiltrados">  
+        <tr *ngFor="let evento of eventosFiltrados">
             <td>
                 <img [collapse]="!exibirImg" [isAnimated]="true" src="/assets/{{evento.imagemURL}}"
                 [style.width.px]="widthImg"
@@ -43,12 +43,16 @@
             <td>{{evento.id}}</td>
             <td>{{evento.tema}}</td>
             <td>{{evento.local}}</td>
-            <td>{{evento.dataEvento}}</td>
+            <td>{{evento.dataEvento | DateTimeFormat}}</td>
             <td>{{evento.qtdPessoas}}</td>
             <td>{{evento.lotes[0].nome}}</td>
             <td>
-                <button type="button" class="btn btn-primary btn-sm mr-2">Editar</button>
-                <button type="button" class="btn btn-danger btn-sm">Excluir</button>
+                <button type="button" class="btn btn-primary btn-sm mr-2" tooltip="Editar" title="Editar">
+                  <i class="fa fa-edit"></i>
+                </button>
+                <button type="button" class="btn btn-danger btn-sm" tooltip="Excluir" (click)="openModal(template)" title="Excluir">
+                  <i class="fa fa-trash"></i>
+                </button>
             </td>
         </tr>
 </tbody>
@@ -60,6 +64,14 @@
     </tr>
 </tfoot>
 </table>
+
+<ng-template #template>
+  <div class="modal-body text-center">
+    <p>Tem certeza que quer deletar o evento?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>
 
 
 
